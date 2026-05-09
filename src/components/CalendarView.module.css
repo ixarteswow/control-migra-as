@@ -14,10 +14,38 @@
 }
 
 .title {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 700;
   text-transform: capitalize;
   margin: 0 !important;
+  flex: 1;
+  text-align: center;
+}
+
+.navGroup {
+  display: flex;
+  gap: 4px;
+}
+
+.pdfIconBtn {
+  min-width: 40px;
+  min-height: 40px;
+  background: var(--accent);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.1s ease;
+}
+
+.pdfIconBtn:active {
+  transform: scale(0.95);
+}
+
+.pdfIconBtn:disabled {
+  opacity: 0.6;
 }
 
 .navBtn {

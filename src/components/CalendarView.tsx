@@ -2,10 +2,15 @@ import { useState, useMemo } from 'react';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { db } from '../db';
 import { getIntensityConfig } from '../constants';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, FileText, Loader2 } from 'lucide-react';
 import styles from './CalendarView.module.css';
 
-export function CalendarView() {
+interface Props {
+  onExportPDF?: () => void;
+  isExporting?: boolean;
+}
+
+export function CalendarView({ onExportPDF, isExporting }: Props) {
   const [currentDate, setCurrentDate] = useState(new Date());
 
   const year = currentDate.getFullYear();
@@ -63,13 +68,27 @@ export function CalendarView() {
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        <button onClick={() => changeMonth(-1)} className={styles.navBtn}>
-          <ChevronLeft size={20} />
-        </button>
+        <div className={styles.navGroup}>
+          <button onClick={() => changeMonth(-1)} className={styles.navBtn}>
+            <ChevronLeft size={20} />
+          </button>
+          <button onClick={() => changeMonth(1)} className={styles.navBtn}>
+            <ChevronRight size={20} />
+          </button>
+        </div>
+        
         <h2 className={styles.title}>{monthName}</h2>
-        <button onClick={() => changeMonth(1)} className={styles.navBtn}>
-          <ChevronRight size={20} />
-        </button>
+
+        {onExportPDF && (
+          <button 
+            onClick={onExportPDF} 
+            className={styles.pdfIconBtn}
+            disabled={isExporting}
+            title="Generar PDF"
+          >
+            {isExporting ? <Loader2 className="animate-spin" size={20} /> : <FileText size={20} />}
+          </button>
+        )}
       </header>
 
       <div className={styles.weekdayGrid}>

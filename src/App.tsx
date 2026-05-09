@@ -15,18 +15,18 @@ export default function App() {
   const reportRef = useRef<HTMLDivElement>(null);
 
   const handleExportPDF = async () => {
-    if (view !== 'calendar') {
-      alert('Por favor, ve a la pestaña de Calendario para generar el informe del mes actual.');
-      setView('calendar');
-      return;
-    }
-
-    if (!reportRef.current) return;
+    // Si ya estamos en el proceso, no hacer nada
+    if (isExporting) return;
     
     setIsExporting(true);
     try {
+      // Buscamos el elemento del calendario en el DOM aunque no sea la vista activa
+      // Para esto, nos aseguramos de que el CalendarView siempre se renderice pero se oculte
+      const calendarEl = document.getElementById('printable-calendar');
+      if (!calendarEl) throw new Error('No se pudo encontrar el calendario para imprimir');
+
       const monthName = new Date().toLocaleDateString('es-ES', { month: 'long', year: 'numeric' });
-      await generatePDF(reportRef.current, `Migrañas-${monthName}`);
+      await generatePDF(calendarEl, `Migrañas-${monthName}`);
     } catch (error) {
       alert('Error al generar PDF: ' + (error as Error).message);
     } finally {
@@ -47,9 +47,17 @@ export default function App() {
       </header>
 
       <main className={styles.main} id="main-content">
-        <div ref={view === 'calendar' ? reportRef : null} className={styles.viewWrapper}>
+        <div className={styles.viewWrapper}>
           {view === 'daily'    && <DailyView />}
-          {view === 'calendar' && <CalendarView />}
+          
+          {/* El calendario siempre se renderiza (oculto si no es su vista) para poder exportar a PDF */}
+          <div 
+            id="printable-calendar" 
+            style={view !== 'calendar' ? { display: 'none' } : { flex: 1, display: 'flex', flexDirection: 'column' }}
+          >
+            <CalendarView onExportPDF={handleExportPDF} isExporting={isExporting} />
+          </div>
+
           {view === 'settings' && (
             <SettingsView onExportPDF={handleExportPDF} isExporting={isExporting} />
           )}
