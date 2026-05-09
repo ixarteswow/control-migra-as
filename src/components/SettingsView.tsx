@@ -1,5 +1,6 @@
 import { db, exportBackup, importBackup } from '../db';
 import { FileText, Download, Upload, Trash2, Loader2 } from 'lucide-react';
+import { AppView } from '../constants';
 import styles from './SettingsView.module.css';
 
 interface Props {
