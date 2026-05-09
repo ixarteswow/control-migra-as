@@ -5,6 +5,7 @@ import { getIntensityConfig, formatDisplayDate, EMPTY_ENTRY } from '../constants
 import { IntensitySelector } from './IntensitySelector';
 import { AuraToggle } from './AuraToggle';
 import { SaveStatus } from './SaveStatus';
+import { Save, Loader2 } from 'lucide-react';
 import styles from './DailyView.module.css';
 
 type SaveState = 'idle' | 'saving' | 'saved' | 'error';
@@ -131,7 +132,17 @@ export function DailyView() {
             onClick={() => handleSave(intensity, aura, notes)}
             disabled={saveState === 'saving'}
           >
-            {saveState === 'saving' ? '⏳ Guardando…' : '💾 Guardar entrada'}
+            {saveState === 'saving' ? (
+              <>
+                <Loader2 className="animate-spin" size={18} /> 
+                <span>Guardando…</span>
+              </>
+            ) : (
+              <>
+                <Save size={18} />
+                <span>Guardar entrada</span>
+              </>
+            )}
           </button>
         </div>
       )}

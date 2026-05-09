@@ -1,4 +1,5 @@
 import { db, exportBackup, importBackup } from '../db';
+import { FileText, Download, Upload, Trash2, Loader2 } from 'lucide-react';
 import styles from './SettingsView.module.css';
 
 interface Props {
@@ -50,7 +51,17 @@ export function SettingsView({ onExportPDF, isExporting }: Props) {
           className={styles.pdfBtn}
           disabled={isExporting}
         >
-          {isExporting ? '⏳ Generando PDF...' : '📄 Generar Informe PDF'}
+          {isExporting ? (
+            <>
+              <Loader2 className="animate-spin" size={18} />
+              <span>Generando PDF...</span>
+            </>
+          ) : (
+            <>
+              <FileText size={18} />
+              <span>Generar Informe PDF</span>
+            </>
+          )}
         </button>
       </section>
 
@@ -61,10 +72,12 @@ export function SettingsView({ onExportPDF, isExporting }: Props) {
         </p>
         <div className={styles.buttonGroup}>
           <button onClick={handleBackup} className={styles.actionBtn}>
-            📥 Exportar JSON
+            <Download size={18} />
+            <span>Exportar JSON</span>
           </button>
           <label className={styles.actionBtn}>
-            📤 Importar JSON
+            <Upload size={18} />
+            <span>Importar JSON</span>
             <input type="file" accept=".json" onChange={handleImport} className="sr-only" />
           </label>
         </div>
@@ -73,7 +86,8 @@ export function SettingsView({ onExportPDF, isExporting }: Props) {
       <section className={`${styles.section} ${styles.dangerZone}`}>
         <h3 className={styles.dangerTitle}>Zona de Peligro</h3>
         <button onClick={clearData} className={styles.deleteBtn}>
-          🗑️ Borrar todos los datos
+          <Trash2 size={18} />
+          <span>Borrar todos los datos</span>
         </button>
       </section>
 

@@ -1,4 +1,5 @@
 import { type AppView } from '../constants';
+import { FileText, Calendar, Settings } from 'lucide-react';
 import styles from './BottomNav.module.css';
 
 interface Props {
@@ -6,10 +7,10 @@ interface Props {
   onChange: (view: AppView) => void;
 }
 
-const NAV_ITEMS: { view: AppView; icon: string; label: string }[] = [
-  { view: 'daily',    icon: '📋', label: 'Hoy'       },
-  { view: 'calendar', icon: '📅', label: 'Calendario' },
-  { view: 'settings', icon: '⚙️', label: 'Ajustes'   },
+const NAV_ITEMS: { view: AppView; icon: React.ReactNode; label: string }[] = [
+  { view: 'daily',    icon: <FileText size={20} />, label: 'Hoy'       },
+  { view: 'calendar', icon: <Calendar size={20} />, label: 'Calendario' },
+  { view: 'settings', icon: <Settings size={20} />, label: 'Ajustes'   },
 ];
 
 export function BottomNav({ current, onChange }: Props) {
@@ -23,7 +24,7 @@ export function BottomNav({ current, onChange }: Props) {
           aria-current={current === view ? 'page' : undefined}
           onClick={() => onChange(view)}
         >
-          <span className={styles.icon} aria-hidden="true">{icon}</span>
+          <div className={styles.icon} aria-hidden="true">{icon}</div>
           <span className={styles.label}>{label}</span>
         </button>
       ))}

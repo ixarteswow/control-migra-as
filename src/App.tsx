@@ -6,6 +6,7 @@ import { SettingsView } from './components/SettingsView';
 import { BottomNav } from './components/BottomNav';
 import { ReloadPrompt } from './components/ReloadPrompt';
 import { generatePDF } from './utils/pdfEngine';
+import { Activity } from 'lucide-react';
 import styles from './App.module.css';
 
 export default function App() {
@@ -14,9 +15,6 @@ export default function App() {
   const reportRef = useRef<HTMLDivElement>(null);
 
   const handleExportPDF = async () => {
-    // Si no estamos en la vista de calendario, cambiamos un momento para capturarla
-    // o simplemente exportamos el contenedor que tiene el calendario.
-    // Para simplificar el MVP, exportamos lo que esté en pantalla si es el calendario.
     if (view !== 'calendar') {
       alert('Por favor, ve a la pestaña de Calendario para generar el informe del mes actual.');
       setView('calendar');
@@ -40,7 +38,7 @@ export default function App() {
     <div className={styles.shell}>
       <header className={styles.header}>
         <div className={styles.logoArea}>
-          <span aria-hidden="true" className={styles.logoIcon}>🧠</span>
+          <Activity className={styles.logoIcon} size={32} />
           <div>
             <h1 className={styles.appName}>Migraine Tracker</h1>
             <p className={styles.appTagline}>Tu registro diario, siempre privado</p>

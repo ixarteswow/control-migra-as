@@ -2,6 +2,7 @@ import { useState, useMemo } from 'react';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { db } from '../db';
 import { getIntensityConfig } from '../constants';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import styles from './CalendarView.module.css';
 
 export function CalendarView() {
@@ -62,9 +63,13 @@ export function CalendarView() {
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        <button onClick={() => changeMonth(-1)} className={styles.navBtn}>◀</button>
+        <button onClick={() => changeMonth(-1)} className={styles.navBtn}>
+          <ChevronLeft size={20} />
+        </button>
         <h2 className={styles.title}>{monthName}</h2>
-        <button onClick={() => changeMonth(1)} className={styles.navBtn}>▶</button>
+        <button onClick={() => changeMonth(1)} className={styles.navBtn}>
+          <ChevronRight size={20} />
+        </button>
       </header>
 
       <div className={styles.weekdayGrid}>

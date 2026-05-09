@@ -129,6 +129,10 @@
   border: 2px solid var(--border);
   border-radius: 16px;
   letter-spacing: 0.02em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   transition:
     transform 0.12s ease,
     background-color 0.2s ease,

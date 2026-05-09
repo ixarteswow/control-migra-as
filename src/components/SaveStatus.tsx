@@ -1,3 +1,4 @@
+import { CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
 import styles from './SaveStatus.module.css';
 
 interface Props {
@@ -6,9 +7,9 @@ interface Props {
 
 const STATUS_CONFIG = {
   idle:   { icon: null,   text: null },
-  saving: { icon: '⏳',  text: 'Guardando' },
-  saved:  { icon: '✅',  text: 'Guardado'  },
-  error:  { icon: '❌',  text: 'Error'      },
+  saving: { icon: <Loader2 className="animate-spin" size={14} />,  text: 'Guardando' },
+  saved:  { icon: <CheckCircle2 size={14} />,  text: 'Guardado'  },
+  error:  { icon: <AlertCircle size={14} />,  text: 'Error'      },
 };
 
 export function SaveStatus({ state }: Props) {
