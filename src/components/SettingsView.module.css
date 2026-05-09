@@ -1,0 +1,97 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px 16px;
+  flex: 1;
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0 !important;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+}
+
+.section h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.description {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.pdfBtn {
+  width: 100%;
+  background-color: var(--accent);
+  color: white;
+  font-weight: 600;
+  border-radius: 12px;
+}
+
+.buttonGroup {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.actionBtn {
+  background-color: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  font-size: 0.85rem;
+  font-weight: 500;
+  border-radius: 12px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dangerZone {
+  background-color: hsl(0, 45%, 15%); /* Rojo muy oscuro mate */
+  border: 1px solid hsl(0, 50%, 30%);
+}
+
+.dangerTitle {
+  color: hsl(20, 100%, 60%) !important; /* Naranja vibrante solicitado */
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.deleteBtn {
+  width: 100%;
+  background-color: hsl(0, 60%, 30%); /* Rojo mate más claro para el botón */
+  border: 1px solid hsl(0, 50%, 45%);
+  color: hsl(20, 100%, 60%); /* Naranja vibrante solicitado */
+  font-weight: 700;
+  border-radius: 12px;
+  padding: 12px;
+  transition: transform 0.1s ease;
+}
+
+.deleteBtn:active {
+  transform: scale(0.98);
+  background-color: hsl(0, 60%, 25%);
+}
+
+.footer {
+  margin-top: auto;
+  text-align: center;
+  padding: 20px;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+}

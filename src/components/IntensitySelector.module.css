@@ -1,0 +1,87 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 4px;
+}
+
+.btn {
+  /* Reset del botón base + override para este componente */
+  min-height: 72px;
+  min-width: unset;
+  width: 100%;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px 4px;
+  border-radius: 14px;
+  border: 2px solid transparent;
+  background-color: var(--bg-surface);
+  position: relative;
+  transition:
+    transform 0.12s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.btn[aria-pressed='true'] {
+  background-color: var(--bg);
+  border-color: var(--border);
+  box-shadow: 0 0 16px var(--bg);
+}
+
+.btn:active {
+  transform: scale(0.93);
+}
+
+.emoji {
+  font-size: 1.5rem;
+  line-height: 1;
+  display: block;
+}
+
+.levelNum {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  transition: color 0.2s ease;
+}
+
+.levelNum.selected {
+  color: var(--color);
+}
+
+.levelLabel {
+  font-size: 0.6rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-align: center;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  padding: 0 2px;
+}
+
+.checkmark {
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  font-size: 0.65rem;
+  color: var(--color);
+  font-weight: 700;
+}
