@@ -67,8 +67,14 @@ export function CalendarView({ onExportPDF, isExporting }: Props) {
 
   return (
     <div className={styles.container}>
+      {/* Cabecera exclusiva para el informe impreso */}
+      <div className="print-only" style={{ display: 'none', marginBottom: '1rem', borderBottom: '2px solid black', paddingBottom: '0.5rem' }}>
+        <h1 style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>Registro Mensual de Migrañas</h1>
+        <p style={{ fontSize: '0.9rem', color: '#666' }}>Documento generado para seguimiento médico</p>
+      </div>
+
       <header className={styles.header}>
-        <div className={styles.navGroup}>
+        <div className={`${styles.navGroup} no-print`}>
           <button onClick={() => changeMonth(-1)} className={styles.navBtn}>
             <ChevronLeft size={20} />
           </button>
@@ -82,7 +88,7 @@ export function CalendarView({ onExportPDF, isExporting }: Props) {
         {onExportPDF && (
           <button 
             onClick={onExportPDF} 
-            className={styles.pdfIconBtn}
+            className={`${styles.pdfIconBtn} no-print`}
             disabled={isExporting}
             title="Generar PDF"
           >
@@ -112,7 +118,23 @@ export function CalendarView({ onExportPDF, isExporting }: Props) {
               <>
                 <span className={styles.dayNumber}>{day.day}</span>
                 {day.intensity !== undefined && (
-                  <div className={styles.indicator} />
+                  <>
+                    <div className={styles.indicator} />
+                    <span className="print-only" style={{ 
+                      display: 'none', 
+                      fontSize: '0.85rem', 
+                      fontWeight: 'bold', 
+                      position: 'absolute', 
+                      top: '2px', 
+                      left: '0',
+                      right: '0', 
+                      textAlign: 'center', 
+                      backgroundColor: 'rgba(255,255,255,0.8)',
+                      zIndex: '1'
+                    }}>
+                      Intensidad: {day.intensity}
+                    </span>
+                  </>
                 )}
               </>
             )}

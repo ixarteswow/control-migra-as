@@ -4,10 +4,11 @@ import styles from './SettingsView.module.css';
 
 interface Props {
   onExportPDF: () => void;
+  onViewChange: (view: AppView) => void;
   isExporting: boolean;
 }
 
-export function SettingsView({ onExportPDF, isExporting }: Props) {
+export function SettingsView({ onExportPDF, onViewChange, isExporting }: Props) {
   const handleBackup = async () => {
     try {
       await exportBackup();
@@ -37,17 +38,27 @@ export function SettingsView({ onExportPDF, isExporting }: Props) {
     alert('Datos borrados correctamente.');
   };
 
+  const handleExportClick = () => {
+    // 1. Cambiamos a la vista de calendario primero (necesario para el reporte)
+    onViewChange('calendar');
+    
+    // 2. Pequeña pausa para que React renderice el calendario antes de imprimir
+    setTimeout(() => {
+      onExportPDF();
+    }, 100);
+  };
+
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Ajustes y Datos</h2>
 
-      <section className={styles.section}>
+      <section className={`${styles.section} no-print`}>
         <h3>Exportar para médico</h3>
         <p className={styles.description}>
           Genera un informe PDF con el historial del mes actual para compartir con tu especialista.
         </p>
         <button
-          onClick={onExportPDF}
+          onClick={handleExportClick}
           className={styles.pdfBtn}
           disabled={isExporting}
         >
@@ -65,7 +76,7 @@ export function SettingsView({ onExportPDF, isExporting }: Props) {
         </button>
       </section>
 
-      <section className={styles.section}>
+      <section className={`${styles.section} no-print`}>
         <h3>Copia de seguridad (Día 1)</h3>
         <p className={styles.description}>
           Tus datos se guardan solo en este dispositivo. Usa estas opciones para moverlos a otro móvil.
@@ -83,7 +94,7 @@ export function SettingsView({ onExportPDF, isExporting }: Props) {
         </div>
       </section>
 
-      <section className={`${styles.section} ${styles.dangerZone}`}>
+      <section className={`${styles.section} ${styles.dangerZone} no-print`}>
         <h3 className={styles.dangerTitle}>Zona de Peligro</h3>
         <button onClick={clearData} className={styles.deleteBtn}>
           <Trash2 size={18} />

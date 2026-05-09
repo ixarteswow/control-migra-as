@@ -6,45 +6,45 @@ export const INTENSITY_CONFIG = [
     level: 0,
     label: 'Sin dolor',
     emoji: '😊',
-    color: 'var(--intensity-0)',
-    bg: 'hsl(142, 71%, 45% / 0.15)',
-    border: 'hsl(142, 71%, 45% / 0.4)',
+    color: 'white',
+    bg: 'rgba(255, 255, 255, 0.05)',
+    border: 'rgba(255, 255, 255, 0.1)',
   },
   {
     level: 1,
     label: 'Leve',
-    emoji: '🙂',
-    color: 'var(--intensity-1)',
-    bg: 'hsl(60, 90%, 55% / 0.15)',
-    border: 'hsl(60, 90%, 55% / 0.4)',
+    emoji: '🙁',
+    color: 'hsl(142, 70%, 45%)',
+    bg: 'hsl(142, 70%, 45% / 0.15)',
+    border: 'hsl(142, 70%, 45% / 0.4)',
   },
   {
     level: 2,
     label: 'Moderado',
-    emoji: '😐',
-    color: 'var(--intensity-2)',
-    bg: 'hsl(30, 95%, 55% / 0.15)',
-    border: 'hsl(30, 95%, 55% / 0.4)',
+    emoji: '😓',
+    color: 'hsl(60, 90%, 50%)',
+    bg: 'hsl(60, 90%, 50% / 0.15)',
+    border: 'hsl(60, 90%, 50% / 0.4)',
   },
   {
     level: 3,
     label: 'Fuerte',
-    emoji: '😣',
-    color: 'var(--intensity-3)',
-    bg: 'hsl(10, 85%, 55% / 0.15)',
-    border: 'hsl(10, 85%, 55% / 0.4)',
+    emoji: '😩',
+    color: 'hsl(30, 90%, 50%)',
+    bg: 'hsl(30, 90%, 50% / 0.15)',
+    border: 'hsl(30, 90%, 50% / 0.4)',
   },
   {
     level: 4,
-    label: 'Severo',
+    label: 'Muy Fuerte',
     emoji: '🤯',
-    color: 'var(--intensity-4)',
-    bg: 'hsl(350, 75%, 45% / 0.15)',
-    border: 'hsl(350, 75%, 45% / 0.4)',
+    color: 'hsl(10, 90%, 50%)',
+    bg: 'hsl(10, 90%, 50% / 0.15)',
+    border: 'hsl(10, 90%, 50% / 0.4)',
   },
 ] as const;
 
-/** Devuelve la configuración de color para una intensidad dada */
+/** Devuelve la configuración de color para una intensidad dada (Escala 0-4) */
 export function getIntensityConfig(level: number) {
   return INTENSITY_CONFIG[Math.max(0, Math.min(4, level))];
 }
@@ -66,7 +66,7 @@ export function formatDisplayDate(dateKey: string): string {
 
 /** Estado inicial vacío de una entrada */
 export const EMPTY_ENTRY: Omit<MigraineEntry, 'date' | 'timestamp'> = {
-  intensity: 0,
+  intensity: 1,
   aura: false,
   notes: '',
 };
