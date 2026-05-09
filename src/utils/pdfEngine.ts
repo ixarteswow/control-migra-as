@@ -19,7 +19,7 @@ export async function generatePDF(element: HTMLElement, title: string) {
     });
 
     // 3. Obtener dimensiones y ratio
-    const imgData = canvas.toDataURL('image/jpeg', 0.85); // JPEG con compresión
+    const imgData = canvas.toDataURL('image/png');
     const pdf = new jsPDF({
       orientation: 'portrait',
       unit: 'mm',
@@ -30,8 +30,8 @@ export async function generatePDF(element: HTMLElement, title: string) {
     const pdfWidth = pdf.internal.pageSize.getWidth();
     const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
 
-    // 4. Inyectar imagen con compresión FAST
-    pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight, undefined, 'FAST');
+    // 4. Inyectar imagen
+    pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight, undefined, 'FAST');
     
     // 5. Guardar/Descargar
     pdf.save(`${title.toLowerCase().replace(/\s+/g, '-')}.pdf`);
