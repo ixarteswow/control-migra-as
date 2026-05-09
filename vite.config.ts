@@ -60,9 +60,13 @@ export default defineConfig({
     chunkSizeWarningLimit: 1000,
     rollupOptions: {
       output: {
-        manualChunks: {
-          'pdf-engine': ['jspdf', 'html2canvas'],
-          'db-engine': ['dexie']
+        manualChunks(id) {
+          if (id.includes('jspdf') || id.includes('html2canvas')) {
+            return 'pdf-engine';
+          }
+          if (id.includes('dexie')) {
+            return 'db-engine';
+          }
         }
       }
     }
