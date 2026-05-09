@@ -56,4 +56,15 @@ export default defineConfig({
       },
     }),
   ],
+  build: {
+    chunkSizeWarningLimit: 1000,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'pdf-engine': ['jspdf', 'html2canvas'],
+          'db-engine': ['dexie']
+        }
+      }
+    }
+  }
 })

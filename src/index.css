@@ -1,11 +1,6 @@
 @import "tailwindcss";
 
 /* ============================================================
-   FUENTE: Outfit desde Google Fonts
-   ============================================================ */
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
-
-/* ============================================================
    TOKENS DE DISEÑO - Paleta de Migraña Tracker
    Tema oscuro por defecto (más fácil de usar con dolor de cabeza)
    ============================================================ */
