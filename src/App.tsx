@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { type AppView } from './constants';
 import { DailyView } from './components/DailyView';
 import { CalendarView } from './components/CalendarView';
@@ -12,7 +12,6 @@ import styles from './App.module.css';
 export default function App() {
   const [view, setView] = useState<AppView>('daily');
   const [isExporting, setIsExporting] = useState(false);
-  const reportRef = useRef<HTMLDivElement>(null);
 
   const handleExportPDF = async () => {
     // Si ya estamos en el proceso, no hacer nada
